@@ -1,1 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhruv Daftary — Operations & Logistics</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF8F4;
+    --warm-white: #FFFFFF;
+    --ink: #1A1612;
+    --charcoal: #2D2926;
+    --mid: #6B6560;
+    --light: #9E9894;
+    --accent: #C8622A;
+    --accent-soft: #E8834A;
+    --accent-pale: #FDF0E8;
+    --sage: #4A6741;
+    --sage-pale: #EDF2EC;
+    --border: #E8E2DA;
+    --shadow: rgba(26,22,18,0.06);
+    --shadow-md: rgba(26,22,18,0.12);
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 64px 5% 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(200,98,42,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 5%; left: -5%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(74,103,65,0.07) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-left { position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent-pale);
+    border: 1px solid rgba(200,98,42,0.2);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: '●'; font-size: 0.5rem; }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.3rem;
+  }
+  .hero-name .italic { font-style: italic; color: var(--accent); }
+  .hero-role {
+    font-size: 1.05rem;
+    color: var(--mid);
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    letter-spacing: 0.01em;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--charcoal);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.8rem 1.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 14px rgba(200,98,42,0.3);
+  }
+  .btn-primary:hover { background: var(--accent-soft); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--charcoal);
+    padding: 0.8rem 1.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-right {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px var(--shadow-md), 0 4px 16px var(--shadow);
+    width: 100%; max-width: 400px;
+    position: relative;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: 40px; right: 40px; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+    border-radius: 0 0 3px 3px;
+  }
+  .avatar-wrap {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-pale);
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    background: var(--accent-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  .card-title { font-size: 0.82rem; color: var(--mid); margin-bottom: 1.5rem; }
+  .card-stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    display: block;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--light); text-transform: uppercase; letter-spacing: 0.05em; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    color: var(--mid);
+    font-family: 'DM Mono', monospace;
+  }
+  .tag.accent { background: var(--accent-pale); border-color: rgba(200,98,42,0.2); color: var(--accent); }
+  .tag.sage { background: var(--sage-pale); border-color: rgba(74,103,65,0.2); color: var(--sage); }
+
+  /* SECTION BASE */
+  section { padding: 6rem 5%; }
+  .section-label {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .section-label::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--accent); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .section-sub { font-size: 1rem; color: var(--mid); max-width: 520px; line-height: 1.7; }
+
+  /* ABOUT */
+  .about { background: var(--warm-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3.5rem; }
+  .about-text p { font-size: 0.97rem; color: var(--charcoal); line-height: 1.8; margin-bottom: 1.2rem; }
+  .about-interests { margin-top: 2rem; }
+  .interests-title { font-size: 0.8rem; font-weight: 500; color: var(--light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
+  .interests-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+  .about-highlights { display: flex; flex-direction: column; gap: 1.2rem; }
+  .highlight-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .highlight-card:hover { box-shadow: 0 6px 24px var(--shadow-md); transform: translateY(-2px); }
+  .highlight-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: var(--accent-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .highlight-icon.sage { background: var(--sage-pale); }
+  .highlight-text h4 { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; }
+  .highlight-text p { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+  /* EXPERIENCE */
+  .experience { background: var(--cream); }
+  .exp-timeline { margin-top: 3.5rem; display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    animation: fadeUp 0.5s ease both;
+  }
+  .exp-item:first-child { padding-top: 0; }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-meta { padding-top: 0.2rem; }
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--light);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+  }
+  .exp-company {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .exp-location { font-size: 0.78rem; color: var(--light); }
+  .exp-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    line-height: 1.65;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  .exp-kpis { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+  .kpi {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.73rem;
+    color: var(--accent);
+    background: var(--accent-pale);
+    border: 1px solid rgba(200,98,42,0.15);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  /* SKILLS */
+  .skills-section { background: var(--warm-white); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .skill-group {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.8rem;
+    transition: box-shadow 0.2s;
+  }
+  .skill-group:hover { box-shadow: 0 8px 30px var(--shadow-md); }
+  .skill-group-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--light);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .skill-group-title span { font-size: 1rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .s-tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    color: var(--charcoal);
+    font-weight: 400;
+    transition: background 0.15s, color 0.15s;
+  }
+  .s-tag:hover { background: var(--accent-pale); color: var(--accent); border-color: rgba(200,98,42,0.2); }
+
+  /* PROJECTS */
+  .projects { background: var(--cream); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .project-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .project-card:hover { box-shadow: 0 12px 40px var(--shadow-md); transform: translateY(-3px); }
+  .proj-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem; }
+  .proj-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--accent-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .proj-icon.sage { background: var(--sage-pale); }
+  .proj-badge { font-size: 0.72rem; color: var(--mid); background: var(--cream); border: 1px solid var(--border); padding: 0.2rem 0.6rem; border-radius: 4px; font-family: 'DM Mono', monospace; }
+  .project-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+  .project-card p { font-size: 0.88rem; color: var(--mid); line-height: 1.7; flex: 1; }
+  .proj-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+  .proj-tech { font-size: 0.72rem; font-family: 'DM Mono', monospace; color: var(--sage); background: var(--sage-pale); border: 1px solid rgba(74,103,65,0.15); padding: 0.2rem 0.5rem; border-radius: 4px; }
+
+  /* EDUCATION */
+  .education { background: var(--warm-white); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3.5rem; }
+  .edu-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .edu-card:hover { box-shadow: 0 8px 30px var(--shadow-md); }
+  .edu-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+  }
+  .edu-card.sage-card::after { background: linear-gradient(90deg, var(--sage), #6EA865); }
+  .edu-period { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--light); margin-bottom: 1rem; }
+  .edu-school { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem; }
+  .edu-degree { font-size: 0.88rem; color: var(--mid); margin-bottom: 1rem; }
+  .edu-grade {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    background: var(--accent-pale);
+    color: var(--accent);
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(200,98,42,0.15);
+  }
+  .edu-grade.sage { background: var(--sage-pale); color: var(--sage); border-color: rgba(74,103,65,0.15); }
+  .edu-courses { font-size: 0.8rem; color: var(--mid); line-height: 1.7; }
+  .edu-courses strong { color: var(--charcoal); font-weight: 500; display: block; margin-bottom: 0.3rem; }
+
+  /* LEADERSHIP */
+  .leadership { background: var(--cream); }
+  .leadership-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 3.5rem; }
+  .lead-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+  .lead-card:hover { box-shadow: 0 6px 20px var(--shadow); }
+  .lead-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+  .lead-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+  .lead-card .role { font-size: 0.78rem; color: var(--accent); font-weight: 500; margin-bottom: 0.6rem; }
+  .lead-card p { font-size: 0.82rem; color: var(--mid); line-height: 1.65; }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--ink);
+    padding: 6rem 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-section::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,98,42,0.12) 0%, transparent 70%);
+  }
+  .contact-section .section-label { justify-content: center; color: rgba(255,255,255,0.5); }
+  .contact-section .section-label::before { background: rgba(255,255,255,0.3); }
+  .contact-section .section-title { color: #fff; margin-bottom: 1rem; }
+  .contact-section .section-sub { color: rgba(255,255,255,0.55); margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; position: relative; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .contact-link.primary { background: var(--accent); color: #fff; box-shadow: 0 4px 20px rgba(200,98,42,0.4); }
+  .contact-link.primary:hover { background: var(--accent-soft); transform: translateY(-2px); }
+  .contact-link.ghost { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.75); }
+  .contact-link.ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+  /* FOOTER */
+  footer {
+    background: #120F0D;
+    padding: 1.5rem 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; color: rgba(255,255,255,0.25);
+    font-family: 'DM Mono', monospace;
+  }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left { animation: fadeUp 0.7s ease both; }
+  .hero-right { animation: fadeUp 0.7s 0.15s ease both; }
+  .section-label, .section-title, .section-sub { animation: fadeUp 0.5s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; gap: 3rem; }
+    .hero-right { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-meta { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; }
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    nav .nav-links { display: none; }
+    .hero-name { font-size: 2.5rem; }
+  }
+
+  /* SCROLL PROGRESS */
+  .progress-bar {
+    position: fixed; top: 64px; left: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+    z-index: 99; width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  /* ACTIVE NAV */
+  .nav-links a.active { color: var(--accent); }
+
+  /* LANGUAGES */
+  .lang-bar-wrap { margin-top: 2rem; }
+  .lang-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+  .lang-name { font-size: 0.85rem; font-weight: 500; color: var(--charcoal); width: 80px; flex-shrink: 0; }
+  .lang-bar-bg { flex: 1; height: 5px; background: var(--border); border-radius: 100px; overflow: hidden; }
+  .lang-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--accent), var(--accent-soft)); transition: width 1.2s ease; }
+  .lang-label { font-size: 0.75rem; color: var(--light); width: 80px; text-align: right; font-family: 'DM Mono', monospace; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <div class="nav-logo">Dhruv<span>.</span>Daftary</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag">Available as Werkstudent · Berlin</div>
+    <h1 class="hero-name">Dhruv<br><span class="italic">Daftary</span></h1>
+    <p class="hero-role">Operations &amp; Logistics Management · Supply Chain · SAP (MM, PP, SD, WM, PS, S/4HANA)</p>
+    <p class="hero-desc">MBA student with background in Information Technology and operations with 2+ years driving end-to-end supply chain efficiency, vendor alignment, and KPI-led process transformation across India and Germany.</p>
+    <div class="hero-ctas">
+      <a href="mailto:Dhruvdaftary@gmail.com" class="btn-primary">✉ Get in Touch</a>
+      <a href="https://de.linkedin.com/in/dhruvdaftary" target="_blank" class="btn-secondary">↗ LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="avatar-wrap">DD</div>
+      <div class="card-name">Dhruv Daftary</div>
+      <div class="card-title">Information Technology → Operations Manager → MBA Candidate, Dresden International University</div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <span class="stat-num">2+</span>
+          <span class="stat-label">Years Exp.</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Brands Managed</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">1.3</span>
+          <span class="stat-label">MBA Grade</span>
+        </div>
+      </div>
+      <div class="card-tags">
+        <span class="tag accent">SAP Systems</span>
+        <span class="tag sage">Lean · JIT</span>
+        <span class="tag">Supply Chain</span>
+        <span class="tag">KPI Dashboards</span>
+        <span class="tag accent">Berlin · Available 20h/week</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-label">01 / About</div>
+  <h2 class="section-title">Bridging Technology<br>&amp; <em style="font-style:italic;color:var(--accent)">Operations</em></h2>
+  <p class="section-sub">A hybrid of IT engineering and business operations turning complex processes into measurable impact.</p>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Hi I am Dhruv an operations and logistics professional currently pursuing my MBA (Grade 1.3) in Logistics Management at Dresden International University, Dresden. My background spans supply chain coordination, SAP ERP systems, and cross-functional leadership across India and Germany.</p>
+      <p>With a foundation in Information Technology from Somaiya Vidyavihar University, India and 2+ years of hands-on operations management, I bridge the gap between technology and business processes right from procurement workflows and vendor negotiations to KPI dashboards and Industrie 4.0 frameworks.</p>
+      <p>I am passionate about the SAP Systems, Cybersecurity in supply chain, and building communities around student leadership and social impact.</p>
+
+      <div class="about-interests">
+        <p class="interests-title">Interests &amp; Topics</p>
+        <div class="interests-list">
+          <span class="tag accent"> SAP Systems</span>
+          <span class="tag">Supply Chain 4.0</span>
+          <span class="tag sage">Cybersecurity in Logistics</span>
+          <span class="tag accent">Startup Ecosystems</span>
+          <span class="tag">Student Leadership</span>
+          <span class="tag sage">Social Impact</span>
+        </div>
+      </div>
+
+      <div class="lang-bar-wrap">
+        <p class="interests-title" style="margin-bottom:1rem">Languages</p>
+        <div class="lang-row"><span class="lang-name">English</span><div class="lang-bar-bg"><div class="lang-bar-fill" style="width:100%"></div></div><span class="lang-label">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name">Hindi</span><div class="lang-bar-bg"><div class="lang-bar-fill" style="width:100%"></div></div><span class="lang-label">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name">Marathi</span><div class="lang-bar-bg"><div class="lang-bar-fill" style="width:100%"></div></div><span class="lang-label">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name">Gujarati</span><div class="lang-bar-bg"><div class="lang-bar-fill" style="width:100%"></div></div><span class="lang-label">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name">German</span><div class="lang-bar-bg"><div class="lang-bar-fill" style="width:40%"></div></div><span class="lang-label">B1 (Learning)</span></div>
+      </div>
+    </div>
+
+    <div class="about-highlights">
+      <div class="highlight-card">
+        <div class="highlight-icon">📦</div>
+        <div class="highlight-text">
+          <h4>End-to-End Supply Chain</h4>
+          <p>Managed procurement, inventory, and vendor lifecycle across 6+ city campaigns with 100% on time delivery.</p>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon" style="background:var(--sage-pale)">🖥️</div>
+        <div class="highlight-text">
+          <h4>SAP ERP Proficiency</h4>
+          <p>Hands on experience across SAP MM, SD, PP, WM, S/4HANA, and Fiori in live procurement and logistics contexts.</p>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">📊</div>
+        <div class="highlight-text">
+          <h4>KPI Driven Decisions</h4>
+          <p>Built Excel dashboards tracking delivery, engagement, and cost driving a 25% gain in campaign performance.</p>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon" style="background:var(--sage-pale)">🤝</div>
+        <div class="highlight-text">
+          <h4>Stakeholder Coordination</h4>
+          <p>Aligned 4+ brands, 20+ partners, 3 departments, and 20+ team members across complex multi-brand operations across India with parallel execution.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-label">02 / Experience</div>
+  <h2 class="section-title">Where I have<br><em style="font-style:italic;color:var(--accent)">Made Impact</em></h2>
+
+  <div class="exp-timeline">
+    <!-- Future company -->
+    <!-- <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">2024 – 2025</div>
+        <a class="exp-company" href="https://volytica.com" target="_blank">volytica diagnostics</a>
+        <div class="exp-location">Berlin, Germany</div>
+      </div>
+      <div class="exp-body">
+        <h3>Werkstudent — Operations &amp; Analytics</h3>
+        <ul class="exp-bullets">
+          <li>Supported operations and analytics workflows in a deep-tech battery diagnostics startup within the German tech ecosystem.</li>
+          <li>Gained direct exposure to Industrie 4.0 practices and data-driven operations in a European B2B environment.</li>
+        </ul>
+        <div class="exp-kpis">
+          <span class="kpi">Data Analytics</span>
+          <span class="kpi">Industrie 4.0</span>
+          <span class="kpi">Startup Ops</span>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Grapevine -->
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Nov 2023 - Apr 2025</div>
+        <a class="exp-company" href="https://www.thegrapevine.co.in" target="_blank">The Grapevine Co.</a>
+        <div class="exp-location">Mumbai, India</div>
+      </div>
+      <div class="exp-body">
+        <h3>Operations Manager</h3>
+        <ul class="exp-bullets">
+          <li>Primary client liaison for 4 brand accounts, managing end-to-end supply chain operations across 6+ city campaigns and aligning 20+ vendors on delivery timelines and compliance standards.</li>
+          <li>Achieved 100% on time service delivery across all activations through rigorous vendor SLA management.</li>
+          <li>Negotiated contracts and standardized SOP documentation, reducing average partner lead time by 60%.</li>
+          <li>Managed procurement workflows aligned to SAP MM principles: purchase order lifecycle, vendor master data, and goods receipt.</li>
+          <li>Drove 20% process efficiency gains through cross-functional workflow redesign across operations, marketing, and logistics.</li>
+          <li>Built KPI dashboards in Excel and Google Workspace tracking campaign engagement, delivery, and operational costs contributing to a 25% increase in client campaign engagement.</li>
+        </ul>
+        <div class="exp-kpis">
+          <span class="kpi">100% On Time Delivery</span>
+          <span class="kpi">−60% Vendor Lead Time</span>
+          <span class="kpi">+25% Campaign Engagement</span>
+          <span class="kpi">+20% Process Efficiency</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KJSCE -->
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">July 2021 - July 2023</div>
+        <span class="exp-company">KJSCE Students' Council</span>
+        <div class="exp-location">Mumbai, India (Volunteering)</div>
+      </div>
+      <div class="exp-body">
+        <h3>Joint General Secretary</h3>
+        <ul class="exp-bullets">
+          <li>Delivered 12+ annual council initiatives on schedule by implementing milestone based project tracking across 5 departments and 200+ team members.</li>
+          <li>Defined responsibilities, workflows, and execution strategies across departments managing a budget of ₹5 Million INR.</li>
+        </ul>
+        <div class="exp-kpis">
+          <span class="kpi">12+ Initiatives</span>
+          <span class="kpi">200+ Team Members</span>
+          <span class="kpi">₹5M Budget</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Moshak -->
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Oct 2020 – Nov 2022</div>
+        <span class="exp-company">Moshak Tech Pvt. Ltd.</span>
+        <div class="exp-location">Mumbai, India</div>
+      </div>
+      <div class="exp-body">
+        <h3>Head of Operations</h3>
+        <ul class="exp-bullets">
+          <li>Designed and optimized business processes across customer onboarding, daily operations, and support reducing average onboarding time by 30%.</li>
+          <li>Built KPI dashboards tracking customer satisfaction, onboarding completion, and support response times. Drove process changes that contributed to a 50% increase in customer retention.</li>
+          <li>Orchestrated cross functional alignment across operations, marketing, and customer success for 3 product launch cycles, meeting all target go live dates.</li>
+        </ul>
+        <div class="exp-kpis">
+          <span class="kpi">−30% Onboarding Time</span>
+          <span class="kpi">+50% Customer Retention</span>
+          <span class="kpi">3 Product Launches</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-label">03 / Skills</div>
+  <h2 class="section-title">Tools &amp; <em style="font-style:italic;color:var(--accent)">Expertise</em></h2>
+  <p class="section-sub">A cross disciplinary blend of operations management, SAP systems, and data driven analytics.</p>
+
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title"><span>📦</span> Operations &amp; Supply Chain</div>
+      <div class="skill-tags">
+        <span class="s-tag">Supply Chain Management</span>
+        <span class="s-tag">Logistics Coordination</span>
+        <span class="s-tag">Vendor Management</span>
+        <span class="s-tag">Procurement</span>
+        <span class="s-tag">Inventory Planning</span>
+        <span class="s-tag">Demand Forecasting</span>
+        <span class="s-tag">Process Optimization</span>
+        <span class="s-tag">KPI Development</span>
+        <span class="s-tag">SOP Development</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span>🖥️</span> SAP &amp; ERP Systems</div>
+      <div class="skill-tags">
+        <span class="s-tag">SAP MM</span>
+        <span class="s-tag">SAP SD</span>
+        <span class="s-tag">SAP PP</span>
+        <span class="s-tag">SAP WM</span>
+        <span class="s-tag">SAP Project Systems</span>
+        <span class="s-tag">S/4HANA</span>
+        <span class="s-tag">SAP Fiori</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span>⚙️</span> Frameworks &amp; Methodologies</div>
+      <div class="skill-tags">
+        <span class="s-tag">Lean Management</span>
+        <span class="s-tag">Just-in-Time (JIT)</span>
+        <span class="s-tag">Kanban</span>
+        <span class="s-tag">Industrie 4.0</span>
+        <span class="s-tag">Logistik 4.0</span>
+        <span class="s-tag">Process Mapping</span>
+        <span class="s-tag">Agile PM</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span>🛠️</span> Tools &amp; Software</div>
+      <div class="skill-tags">
+        <span class="s-tag">Microsoft Excel (Advanced)</span>
+        <!-- <span class="s-tag">Power BI</span> -->
+        <span class="s-tag">Google Workspace</span>
+        <span class="s-tag">SQL</span>
+        <span class="s-tag">Python</span>
+        <span class="s-tag">Data Analysis</span>
+        <span class="s-tag">Microsoft PowerPoint</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="section-label">04 / Projects</div>
+  <h2 class="section-title">What I have <em style="font-style:italic;color:var(--accent)">Built</em></h2>
+  <p class="section-sub">Technical and analytical projects spanning web development, database systems, and hackathon solutions.</p>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-icon">🏆</div>
+        <span class="proj-badge">Hackathon</span>
+      </div>
+      <h3>Code for Good '22 — JPMorgan Chase</h3>
+      <p>Built a web application workflow system for nonprofit startup enrollment and approvals, handling online applications, review scheduling, payment processing, and additional service requests end-to-end.</p>
+      <div class="proj-stack">
+        <span class="proj-tech">Web App</span>
+        <span class="proj-tech">Workflow Automation</span>
+        <span class="proj-tech">JPMorgan Chase</span>
+      </div>
+    </div>
+    <!-- <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-icon sage">📝</div>
+        <span class="proj-badge">Full-Stack</span>
+      </div>
+      <h3>Blog Platform</h3>
+      <p>Designed and developed a full-featured blog website with content management, user authentication, and dynamic post rendering using Django and SQLite.</p>
+      <div class="proj-stack">
+        <span class="proj-tech">Django</span>
+        <span class="proj-tech">SQLite</span>
+        <span class="proj-tech">Python</span>
+      </div>
+    </div> -->
+    <!-- <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-icon">🛒</div>
+        <span class="proj-badge">Systems</span>
+      </div>
+      <h3>Supermarket Management System</h3>
+      <p>Built a database-backed inventory and billing management system for retail operations, featuring product tracking, transaction management, and reporting modules.</p>
+      <div class="proj-stack">
+        <span class="proj-tech">Python</span>
+        <span class="proj-tech">MySQL</span>
+        <span class="proj-tech">DBMS</span>
+      </div>
+    </div> -->
+    <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-icon sage">📊</div>
+        <span class="proj-badge">Analytics</span>
+      </div>
+      <h3>Operational KPI Dashboard Suite</h3>
+      <p>Designed multi dimensional KPI dashboards at The Grapevine Co. tracking campaign engagement, delivery performance, and cost metrics enabling data driven client reporting across 4 brand accounts.</p>
+      <div class="proj-stack">
+        <span class="proj-tech">Excel</span>
+        <!-- <span class="proj-tech">Power BI</span> -->
+        <span class="proj-tech">Google Workspace</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="section-label">05 / Education</div>
+  <h2 class="section-title">Academic <em style="font-style:italic;color:var(--accent)">Foundation</em></h2>
+  <p class="section-sub">Blending business strategy, logistics systems, and engineering thinking.</p>
+
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-period">Oct 2025 – Present</div>
+      <div class="edu-school">Dresden International University</div>
+      <div class="edu-degree">MBA in Logistics Management</div>
+      <div class="edu-grade">⭐ Grade 1.3 (German scale, with distinction)</div>
+      <div class="edu-courses">
+        <strong>Relevant Coursework</strong>
+        Strategic Management · SAP ERP Systems · Controlling · Project Management · Procurement · Process Management · Change Management · Organisation &amp; Distribution
+      </div>
+    </div>
+    <div class="edu-card sage-card">
+      <div class="edu-period">Sep 2020 – May 2024</div>
+      <div class="edu-school">Somaiya Vidyavihar University (KJSCE)</div>
+      <div class="edu-degree">B.Tech in Information Technology</div>
+      <div class="edu-grade sage">⭐ Grade 1.28 (German scale, with distinction)</div>
+      <div class="edu-courses">
+        <strong>Relevant Coursework</strong>
+        Systems Analysis · Databases · Software Engineering · Python · Java · Algorithm Analysis · Data Structures
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="leadership" id="leadership">
+  <div class="section-label">06 / Leadership &amp; Volunteering</div>
+  <h2 class="section-title">Community &amp; <em style="font-style:italic;color:var(--accent)">Impact</em></h2>
+  <p class="section-sub">Giving back through social initiatives, student governance, and NGO work.</p>
+
+  <div class="leadership-grid">
+    <div class="lead-card">
+      <div class="lead-icon">♻️</div>
+      <h4>KJSCE Parvaah</h4>
+      <div class="role">Vice President</div>
+      <p>Led environmental and community initiatives including cleanup drives, food donation campaigns, and recycling programs.</p>
+    </div>
+    <div class="lead-card">
+      <div class="lead-icon">🏛️</div>
+      <h4>KJSCE Students' Council</h4>
+      <div class="role">Joint General Secretary</div>
+      <p>Oversaw strategic direction and execution of 12+ council initiatives annually across 5 departments and 200+ volunteers.</p>
+    </div>
+    <div class="lead-card">
+      <div class="lead-icon">💙</div>
+      <h4>Nurturing Lives NGO</h4>
+      <div class="role">Student Intern</div>
+      <p>Contributed to the "Eksaathe" transgender awareness project promoting inclusion and social equity through community outreach.</p>
+    </div>
+    <div class="lead-card">
+      <div class="lead-icon">🎖️</div>
+      <h4>Wings Military Academy</h4>
+      <div class="role">Instructor</div>
+      <p>Trained and mentored students in discipline, leadership, and structured thinking within a semi military learning environment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label">07 / Contact</div>
+  <h2 class="section-title">Let's Connect</h2>
+  <p class="section-sub">Open to Werkstudent roles (20h/week) in SAP, operations, logistics, or supply chain in Berlin (remotely across Germany). Authorized to work immediately.</p>
+  <div class="contact-links">
+    <a href="mailto:Dhruvdaftary@gmail.com" class="contact-link primary">✉ Dhruvdaftary@gmail.com</a>
+    <a href="tel:+4915510833598" class="contact-link ghost">📞 +49 155 1083 3598</a>
+    <a href="https://de.linkedin.com/in/dhruvdaftary" target="_blank" class="contact-link ghost">↗ LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Dhruv Daftary · Berlin, Germany</span>
+  <span>Built with ❤ · Available immediately as Werkstudent</span>
+</footer>
+
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressBar').style.width = scrolled + '%';
+  });
+
+  // Active nav highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
