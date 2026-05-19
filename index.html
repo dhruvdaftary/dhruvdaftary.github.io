@@ -587,6 +587,37 @@ transition: width 0.1s linear;
 .lang-bar-bg { flex: 1; height: 5px; background: var(--border); border-radius: 100px; overflow: hidden; }
 .lang-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--accent), var(--accent-soft)); transition: width 1.2s ease; }
 .lang-label { font-size: 0.75rem; color: var(--light); width: 80px; text-align: right; font-family: 'DM Mono', monospace; }
+
+/* CERTIFICATIONS */
+.certifications { background: var(--cream); }
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+.cert-card {
+  background: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+.cert-card::before {
+  content: '🏅';
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+.cert-card:hover { box-shadow: 0 8px 30px var(--shadow-md); transform: translateY(-2px); }
+.cert-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--ink); }
+.cert-org { font-size: 0.82rem; font-weight: 500; color: var(--accent); }
+.cert-date { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--light); }
+.cert-link {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-size: 0.78rem; color: var(--mid);
+  text-decoration: none; margin-top: 0.4rem;
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 0.25rem 0.7rem; width: fit-content;
+  transition: color 0.2s, border-color 0.2s;
+}
+.cert-link:hover { color: var(--accent); border-color: var(--accent); }
 </style>
 </head>
 <body>
@@ -594,7 +625,7 @@ transition: width 0.1s linear;
 <div class="progress-bar" id="progressBar"></div>
 
 <nav>
-  <div class="nav-logo">Dhruv<span>.</span>Daftary</div>
+  <div class="nav-logo">DD<span>.</span></div>
 
   <ul class="nav-links">
     <li><a href="#about" data-i18n="nav.about">About</a></li>
@@ -605,7 +636,7 @@ transition: width 0.1s linear;
     <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
   </ul>
 
-  <!-- Language Toggle (top right, BMW-style) -->
+  <!-- Language Toggle -->
   <div class="lang-toggle">
     <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
     <div class="lang-divider"></div>
@@ -628,8 +659,8 @@ transition: width 0.1s linear;
   </div>
   <div class="hero-right">
     <div class="hero-card">
-      <div class="avatar-wrap">DD</div>
-      <div class="card-name">Dhruv Daftary</div>
+      <!-- <div class="avatar-wrap">DD</div> -->
+      <div class="card-name" data-i18n="hero.card.name">My Journey</div>
       <div class="card-title" data-i18n="hero.card.title">Information Technology → Operations Manager → MBA Candidate, Dresden International University</div>
       <div class="card-stats">
         <div class="stat-item">
@@ -911,9 +942,35 @@ transition: width 0.1s linear;
   </div>
 </section>
 
+<!-- CERTIFICATIONS -->
+<section class="certifications" id="certifications">
+  <div class="section-label" data-i18n="cert.label">06 / Certifications</div>
+  <h2 class="section-title" data-i18n="cert.title">Certifications &amp; <em style="font-style:italic;color:var(--accent)">Credentials</em></h2>
+  <p class="section-sub" data-i18n="cert.sub">Professional certifications and verified credentials.</p>
+  <div class="cert-grid">
+
+    <!-- Certification MM SAP Linkedin -->
+    <div class="cert-card">
+      <div class="cert-name">Learning SAP MM (Materials Management)</div>
+      <div class="cert-org">LinkedIn</div>
+      <div class="cert-date">Issued: May 2026</div>
+      <a class="cert-link" href="https://www.linkedin.com/learning/certificates/6a5cfd81de6ab4619fe8d9062b143b95d316358e5497433b4b4035296134ee4d?trk=share_certificate" target="_blank">↗ View Credential</a>
+    </div>
+
+    <!-- Certification 2
+    <div class="cert-card">
+      <div class="cert-name">Your Certification Name</div>
+      <div class="cert-org">Issuing Organization</div>
+      <div class="cert-date">Issued: Month YYYY</div>
+      <a class="cert-link" href="https://your-credential-link.com" target="_blank">↗ View Credential</a>
+    </div> -->
+
+  </div>
+</section>
+
 <!-- LEADERSHIP -->
 <section class="leadership" id="leadership">
-  <div class="section-label" data-i18n="lead.label">06 / Leadership &amp; Volunteering</div>
+  <div class="section-label" data-i18n="lead.label">07 / Leadership &amp; Volunteering</div>
   <h2 class="section-title" data-i18n="lead.title">Community &amp; <em style="font-style:italic;color:var(--accent)">Impact</em></h2>
   <p class="section-sub" data-i18n="lead.sub">Giving back through social initiatives, student governance, and NGO work.</p>
   <div class="leadership-grid">
@@ -946,7 +1003,7 @@ transition: width 0.1s linear;
 
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
-  <div class="section-label" data-i18n="contact.label">07 / Contact</div>
+  <div class="section-label" data-i18n="contact.label">08 / Contact</div>
   <h2 class="section-title" data-i18n="contact.title">Let's Connect</h2>
   <p class="section-sub" data-i18n="contact.sub">Open to Werkstudent roles (20h/week) in SAP, operations, logistics, or supply chain in Berlin (remotely across Germany). Authorized to work immediately.</p>
   <div class="contact-links">
@@ -973,6 +1030,7 @@ const i18n = {
     "kpi2.3": "₹5M Budget",
     "edu1.period": "Oct 2025 – Present",
     "footer.copy": "© 2026 Dhruv Daftary · Berlin, Germany",
+    "hero.card.name": "My Journey",
 
     "nav.about": "About",
     "nav.experience": "Experience",
@@ -1086,7 +1144,7 @@ const i18n = {
     "edu2.grade": "⭐ Grade 1.28 (German scale, with distinction)",
     "edu2.courses": "Systems Analysis · Databases · Software Engineering · Python · Java · Algorithm Analysis · Data Structures",
 
-    "lead.label": "06 / Leadership & Volunteering",
+    "lead.label": "07 / Leadership & Volunteering",
     "lead.title": "Community & <em style=\"font-style:italic;color:var(--accent)\">Impact</em>",
     "lead.sub": "Giving back through social initiatives, student governance, and NGO work.",
     "lc1.role": "Vice President",
@@ -1098,11 +1156,14 @@ const i18n = {
     "lc4.role": "Instructor",
     "lc4.desc": "Trained and mentored students in discipline, leadership, and structured thinking within a semi military learning environment.",
 
-    "contact.label": "07 / Contact",
+    "contact.label": "08 / Contact",
     "contact.title": "Let's Connect",
     "contact.sub": "Open to Werkstudent roles (20h/week) in SAP, operations, logistics, or supply chain in Berlin (remotely across Germany). Authorized to work immediately.",
 
     "footer.tagline": "Built with ❤ · Available immediately as Werkstudent",
+    "cert.label": "06 / Certifications",
+    "cert.title": "Certifications &amp; <em style=\"font-style:italic;color:var(--accent)\">Credentials</em>",
+    "cert.sub": "Professional certifications and verified credentials.",
   },
 
   de: {
@@ -1114,6 +1175,7 @@ const i18n = {
     "kpi2.3": "₹5 Mio. Budget",
     "edu1.period": "Okt. 2025 – heute",
     "footer.copy": "© 2026 Dhruv Daftary · Berlin, Deutschland",
+    "hero.card.name": "Mein Werdegang",
 
     "nav.about": "Über mich",
     "nav.experience": "Erfahrung",
@@ -1227,7 +1289,7 @@ const i18n = {
     "edu2.grade": "⭐ Note 1,28 (Deutsche Skala, mit Auszeichnung)",
     "edu2.courses": "Systemanalyse · Datenbanken · Software Engineering · Python · Java · Algorithmenanalyse · Datenstrukturen",
 
-    "lead.label": "06 / Führung & Ehrenamt",
+    "lead.label": "07 / Führung & Ehrenamt",
     "lead.title": "Gemeinschaft & <em style=\"font-style:italic;color:var(--accent)\">Wirkung</em>",
     "lead.sub": "Rückgabe durch soziale Initiativen, studentische Selbstverwaltung und NGO-Arbeit.",
     "lc1.role": "Vizepräsident",
@@ -1239,11 +1301,14 @@ const i18n = {
     "lc4.role": "Ausbilder",
     "lc4.desc": "Studenten in Disziplin, Führung und strukturiertem Denken in einem halimilitärischen Lernumfeld trainiert und betreut.",
 
-    "contact.label": "07 / Kontakt",
+    "contact.label": "08 / Kontakt",
     "contact.title": "Lassen Sie uns verbinden",
     "contact.sub": "Offen für Werkstudentenstellen (20h/Woche) in SAP, Operations, Logistik oder Supply Chain in Berlin (deutschlandweit remote). Sofort arbeitsberechtigt.",
 
     "footer.tagline": "Mit ❤ erstellt · Sofort als Werkstudent verfügbar",
+    "cert.label": "06 / Zertifizierungen",
+    "cert.title": "Zertifizierungen &amp; <em style=\"font-style:italic;color:var(--accent)\">Nachweise</em>",
+    "cert.sub": "Professionelle Zertifizierungen und verifizierte Qualifikationen.",
   }
 };
 
